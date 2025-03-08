@@ -1060,7 +1060,7 @@ def get_models():
 
 
 @app.route("/users/<path:filename>", methods=['GET'])
-def downloadAgentAttachment():
+def downloadAgentAttachment(filename):
     max_retries = 2
     retry_count = 0
 
