@@ -791,7 +791,7 @@ def process_model_response(response, model):
 
 
 def handle_image_response(image_url):
-    return f"![image]({CONFIG['LOCAL_HOST_URL']}/{image_url})"
+    return f"![image]({CONFIG['LOCAL_HOST_URL']}{image_url})"
 
 
 def handle_non_stream_response(response, model):
