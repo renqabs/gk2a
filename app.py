@@ -99,8 +99,6 @@ CONFIG = {
         "BASE_URL": "https://grok.com",
         "API_KEY": os.environ.get("API_KEY", "sk-123456"),
         "SIGNATURE_COOKIE": None,
-        "PICGO_KEY": os.environ.get("PICGO_KEY") or None,
-        "TUMY_KEY": os.environ.get("TUMY_KEY") or None,
         "RETRY_TIME": 1000,
         "PROXY": os.environ.get("PROXY") or None
     },
@@ -591,11 +589,6 @@ class GrokApiClient:
             return ''
 
     def prepare_chat_request(self, request):
-        if ((request["model"] == 'grok-2-imageGen' or request["model"] == 'grok-3-imageGen') and
-                not CONFIG["API"]["PICGO_KEY"] and not CONFIG["API"]["TUMY_KEY"] and
-                request.get("stream", False)):
-            raise ValueError("该模型流式输出需要配置PICGO或者TUMY图床密钥!")
-
         todo_messages = request["messages"]
         if request["model"] in ['grok-2-imageGen', 'grok-3-imageGen', 'grok-3-deepsearch']:
             last_message = todo_messages[-1]
