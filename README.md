@@ -61,8 +61,6 @@
 |`CF_CLEARANCE` | cf的5秒盾后的值，随便一个号过盾后的都可以，这个cf_clearance和你的ip是绑定的，如果更换ip需要重新获取。通用，可以提高破盾的稳定性 | （可以不填，默认无） | `cf_clearance=xxxxxx`|
 |`API_KEY` | 自定义认证鉴权密钥 | （可以不填，默认是sk-123456） | `sk-123456`|
 |`PROXY` | 代理设置，支持https和Socks5 | 可不填，默认无 | -|
-|`PICGO_KEY` | PicGo图床密钥，两个图床二选一 | 不填无法流式生图 | -|
-|`TUMY_KEY` | TUMY图床密钥，两个图床二选一 | 不填无法流式生图 | -|
 |`ISSHOW_SEARCH_RESULTS` | 是否显示搜索结果 | （可不填，默认关闭） | `true/false`|
 |`SSO` | Grok官网SSO Cookie,可以设置多个使用英文 , 分隔，我的代码里会对不同账号的SSO自动轮询和均衡 | （除非开启IS_CUSTOM_SSO否则必填） | `sso,sso`|
 |`PORT` | 服务部署端口 | （可不填，默认3000） | `3000`|
@@ -85,8 +83,6 @@ docker run -it -d --name grok2api_python \
   -p 3000:3000 \
   -e IS_TEMP_CONVERSATION=false \
   -e API_KEY=your_api_key \
-  -e TUMY_KEY=你的图床key,和PICGO_KEY 二选一 \
-  -e PICGO_KEY=你的图床key,和TUMY_KEY二选一 \
   -e IS_CUSTOM_SSO=false \
   -e ISSHOW_SEARCH_RESULTS=false \
   -e PORT=3000 \
