@@ -1078,7 +1078,9 @@ def downloadAgentAttachment(filename):
             )
 
             if image_base64_response.status_code == 200:
-                break
+                # 成功获取响应后，直接返回
+                header = {"Content-Type": image_base64_response.headers.get("Content-Type")}
+                return Response(image_base64_response.content, headers=header)
 
             retry_count += 1
             if retry_count == max_retries:
@@ -1090,12 +1092,13 @@ def downloadAgentAttachment(filename):
             logger.error(str(error), "Server")
             retry_count += 1
             if retry_count == max_retries:
-                raise
+                # 达到最大重试次数时返回错误响应
+                return Response("Service unavailable", status=503)
 
             time.sleep(CONFIG["API"]["RETRY_TIME"] / 1000 * retry_count)
 
-        header = {"Content-Type": image_base64_response.headers.get("Content-Type")}
-        return Response(image_base64_response.content, headers=header)
+    # 以防万一添加默认错误返回
+    return Response("Service unavailable", status=503)
 
 @app.route('/v1/chat/completions', methods=['POST'])
 def chat_completions():
