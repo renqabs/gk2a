@@ -1085,13 +1085,10 @@ def downloadAgentAttachment(filename):
             logger.error(str(error), "Server")
             retry_count += 1
             if retry_count == max_retries:
-                # 达到最大重试次数时返回错误响应
-                return Response("Service unavailable", status=503)
+                raise
 
             time.sleep(CONFIG["API"]["RETRY_TIME"] / 1000 * retry_count)
 
-    # 以防万一添加默认错误返回
-    return Response("Service unavailable", status=503)
 
 @app.route('/v1/chat/completions', methods=['POST'])
 def chat_completions():
